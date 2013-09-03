@@ -1,0 +1,10 @@
+<%- model_class = Customer -%>
+<style>
+h2{margin-left: 200px;
+   
+}
+</style>
+<div class="page-header">
+  <h2><%=t '.title', :default => [:'helpers.titles.new', '添加客户'], :model => model_class.model_name.human.titleize %></h2>
+</div>
+<%= render :partial => 'form' %>

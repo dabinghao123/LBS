@@ -1,0 +1,66 @@
+<%= form_for @business, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label "商家名称", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+<!-- sdfs -->
+  <div class="control-group">
+    <%= f.label "请选择省市", :class => 'control-label' %>
+    <div class="controls">
+     <%= f.select :province_id, Province.all.collect {|p| [ p.city, p.id ] }, {prompt: true}%> 
+ </div>
+
+</div>
+          
+  <div class="control-group">
+    <%= f.label "地址", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :address, :class => 'text_field',:id=>'add' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "经度", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lat, :class => 'text_field', :id=>'lat' %>
+    </div>
+  </div>
+     <div id="bbs" class="btn btn-primary"  style="margin-left:400px; position: absolute;margin-top:-10px;">
+            获取经纬度
+   </div>
+  <div class="control-group">
+    <%= f.label "纬度", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :lng, :class => 'text_field', :id=>'lng' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "电话号码", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :tel, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label "手机号码", :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :phone, :class => 'number_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                businesses_path, :class => 'btn' %>
+  </div>
+<% end %>
+<script type="text/javascript">
+      
+$("#bbs").click(function(){
+ $.get("/businesses/searchdata",{address:$("#add").val(),city:$("#business_province_id").val()},function(data){
+     $("#lng").attr("value",data.split(",")[0])
+      $("#lat").attr("value",data.split(",")[1])
+  });
+});
+
+</script>

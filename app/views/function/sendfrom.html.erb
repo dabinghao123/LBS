@@ -1,0 +1,75 @@
+<div style="border:1px;border-color:red;width:700px;height:600px;background:#ffffff">
+ <p style="background:#111111;height:20px;color:red;padding-left:10px;">群发短信</p>
+ <p style="padding-left:5%">注意:内容不能超过350 已用数：<b id="x">0</b>  还剩：<b id="y">350</b> 每条短信70字. 短信分为段发送</p>
+ <form action="/function/sendmsg"  method="post">
+ 	<input type="hidden" name="username" value="cdxx"/> 
+ 	<input type="hidden" name="password" value="cdxx"/> 
+ <div style="">
+   <p style="width:10px;padding-left:10px;float:left;padding-top:24px;">发送内容</p>
+   <textarea name="content" id="msg" cols="2" rows="6" style="margin-left:10px;width:600px;"></textarea>
+   <a href="#" class="btn" style="float:right;margin-right:80px;" id="rs1">清空</a>
+ </div>
+
+  <div style="margin-top:50px;">
+    <p style="width:10px;float:left;margin-left:10px;padding-top:24px;">发送号码</p>
+     <textarea name="mobile"  id="num" cols="2" rows="6" style="margin-left:10px;width:600px;height:200px;"><%=@cust.collect(&:tel).join("\n")%></textarea>
+        
+     <p style="both:clear;"></p>
+     <span style="padding-left:30px;float:left;">
+     <p style="color:red"> 当前发送号码：<b id="tel" >0</b>个，最多输入20万 个</p>
+     <p style="color:red"> 防止短信内容被移动公司屏蔽，批量群发前请先单个或几个号码测试</p>
+     </span>
+     <div style="float:right;padding-right:60px;">
+      <input type="submit" class="btn" value="发送">
+      <!-- <a href="#" class="btn" id="send">发送</a> -->
+      <a href="#"  class="btn" id="rs2">清空</a>
+     </div>
+      <p style="both:clear;"></p>
+  <!--    <span >
+       防止短信内容被移动公司屏蔽，批量群发前请先单个或几个号码测试
+     </span> -->
+       
+   </div>
+ </form>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#rs1").click(function(){
+    $("#msg").val("");
+    
+});
+
+$("#rs2").click(function(){
+    $("#num").val("");
+});
+
+$("#msg").keyup(function(){
+    var leng=$("#msg").val().length;
+      $("#x").text(leng);
+      $("#y").text(350-leng);
+
+});
+$("#num").keyup(function(){
+	var  num=$("#num").val();
+	   regx = /[^\n\d\r]+/gi;
+    if(regx.test(num)){
+       alert("请输入11位的手机号码");
+    }else{
+      var l=$("#num").val().split("\n").length
+        $("#tel").text(l);
+    }
+
+});
+/*var  num=$("#num").val();
+	   regx = /[^\n\d\r]+/gi;
+    if(regx.test(num)){
+       alert("请输入11位的手机号码");
+    }else{
+      var l=$("#num").val().split("\n").length
+        $("#tel").text(l);
+    };*/
+})
+
+
+
+</script>

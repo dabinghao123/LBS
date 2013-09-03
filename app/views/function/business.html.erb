@@ -1,0 +1,72 @@
+ 
+<div>
+
+<%= form_tag({:controller=> "function",:action => "business"}, :multipart => true) do %>
+    <table>  
+        <!-- first -->
+         <tr>  
+                <td>  
+                    <label >  
+                        请选择省市 
+                    </label>  
+                </td>  
+                <td>  
+                     <select name="city">
+                     <option value="0">- - - -请选择省市区- - - -</option>
+                     <% @provinces.each do |pro|%>
+                     <option value="<%=pro.id%>"><h5 align="center"><%=pro.city%></h5></option>
+                     <% end %>
+                       
+                      <!-- <option value="1">杭州市</option>
+                      <option value="2">金华市</option>          
+                      <option value="3">宁波市</option>
+                      <option value="4">衢州市</option>
+                      <option value="5">义乌市</option>
+                      <option value="6">台州市</option>
+                      <option value="7">绍兴市</option>
+                      <option value="8">湖州市</option>
+                      <option value="9">南通市</option>
+                      <option value="10">扬州市</option>
+                      <option value="11">泰州市</option>
+                      <option value="12">苏州市</option>
+                      <option value="13">常熟市</option>
+                      <option value="14">徐州市</option>
+                      <option value="15">南京市</option>
+                      <option value="16"> 张家港 </option> -->
+                     </select>
+                     </td> </tr>
+<!--sencode -->
+            <tr>  
+                <td>  
+                    <label >  
+                        请导入商户的csv信息文件:  
+                    </label>  
+                </td>  
+                <td>  
+                    <%= file_field_tag 'file'%>  
+            
+                </td>  
+            </tr>  
+            <tr>  
+                <td colspan='2' style="height:">  
+                    <%= submit_tag '确定'%>  
+                </td>  
+            </tr>  
+        </table>  
+<% end %>
+<span style="color:red">
+0.csv文件文件里的地址只能是一个市区的如：（杭州市）<br/>
+1.请按照一下格式导入商家信息。<br/>
+2.文件的类型必须为.csv文件类型。<br/>
+3.第一列必须位类别，第二列为商家姓名，详见下图。
+4.csv文件的编码格式为utf-8：用excle另存为csv文件，将保存好的csv文件用记事本打开然后在文件选项中选择另存为修改文件编码为utf-8 文件类型为所有文件具体操作如图所示.
+</span>
+        <img src="/images/bus.jpg" width="1000px;" height="400px;"/>
+    <br/>
+        <br/>
+    <img src="/images/jsb.png" width="1000px;" height="400px;"/>
+    <br/>
+        <br/>
+    <img src="/images/save.png" width="1000px;" height="400px;"/>
+  </div> 
+

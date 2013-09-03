@@ -1,0 +1,31 @@
+<%- model_class = Customer -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong>姓名:</strong></dt>
+  <dd><%= @customer.name %></dd>
+  <dt><strong> 手机号码:</strong></dt>
+  <dd><%= @customer.tel %></dd>
+  <dt><strong>经度:</strong></dt>
+  <dd><%= @customer.lng %></dd>
+  <dt><strong>纬度:</strong></dt>
+  <dd><%= @customer.lat %></dd>
+  <dt><strong>别名:</strong></dt>
+  <dd><%= @customer.nickname %></dd>
+   <dt><strong>地址:</strong></dt>
+  <dd><%= @customer.address %></dd>
+</dl>
+
+<div class="form-actions">
+  <%= link_to I18n.t('.back', :default => t("helpers.links.back")),
+              customers_path, :class => 'btn'  %>
+  <%= link_to I18n.t('.edit', :default => t("helpers.links.edit")),
+              edit_customer_path(@customer), :class => 'btn' %>
+  <%= link_to I18n.t('.destroy', :default => t("helpers.links.destroy")),
+              customer_path(@customer),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

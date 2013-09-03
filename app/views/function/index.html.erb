@@ -1,0 +1,145 @@
+<div>
+<b>查询商家周边的顾客信息</b>
+<p><form class="bs-docs-example form-search" method="post" action="<% url_for(:contorller=>'function',:aciton=>'index')%>">
+            1.请输入商家名称：<input  id="1autocomplete" type="text"/>
+             <!-- <div id="div1"></div> -->
+             请选择搜索的范围：<select style="width:50px;" name="num">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+             </select>公里&nbsp;&nbsp;
+            <button type="submit" class="btn">Search</button>
+
+          </form></p>
+
+          <p>
+          	<form class="bs-docs-example form-search" method="post"action="<% url_for(:contorller=>'function',:aciton=>'index')%>">
+            2.请选择商家名称：
+         
+            <select style="width:250px;" name="sid">
+        
+
+            <% @business.each  do |bus|%>
+              <option value="<%=bus.id%>"><%=bus.name%></option>
+             <% end %>
+            </select>
+              请选择搜索的范围：<select style="width:50px;" name="num2">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+             </select>公里&nbsp;&nbsp;
+             <button type="submit" class="btn">Search</button>
+              
+          </form>
+   
+        </p>
+
+      <b>查询商家周边的商家信息</b>
+      <p>
+            <form class="bs-docs-example form-search" method="post"action="<% url_for(:contorller=>'function',:aciton=>'index')%>">
+            3.请选择商家名称：
+         
+            <select style="width:250px;" name="sid">
+        
+
+            <% @business.each  do |bus|%>
+              <option value="<%=bus.id%>"><%=bus.name%></option>
+             <% end %>
+            </select>
+              请选择搜索的范围：<select style="width:50px;" name="num3">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+             </select>公里&nbsp;&nbsp;
+             <button type="submit" class="btn">Search</button>
+          </form>
+   
+        </p>
+
+<div>
+
+   <div  class="btn btn-primary"  style="margin-left:500px;width:100px;height:25px;">
+           <%= link_to "下载csv文件",function_download_path%> 
+   </div>
+     <div class="btn" style="position:absolute;margin-left:10px;">
+    <%= link_to "群发短信",function_sendfrom_path%> 
+  </div>
+   <span>
+<table class="table table-striped" style="width:800px;">
+ <thead>
+
+    <tr>
+      <th>ID</th>
+      <th>姓名</th>    
+      <th>手机号码</th>
+      <th>地址</th>
+      <th>经度</th>
+      <th>纬度</th>
+      <th>别名</th>
+    </tr>
+  </thead>
+</table>
+   </span>
+<div style="background:#999999;overflow:scroll;width:800px;height:600px;">
+<%if @customers!=nil%>
+<table class="table table-striped" style="width:800px;">
+ 
+  <tbody>
+ <% @customers.each  do  |cuss|%>
+      <tr>
+        <td><%= cuss.id%></td>
+        <td style="width:50px;"><%= cuss.name %></td>
+        <td><%= cuss.tel %></td>
+        <td><%= cuss.address %></td>
+        <td><%= cuss.lng %></td>
+        <td><%= cuss.lat %></td>
+        <td><%= cuss.nickname %></td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
+<%end%>
+
+
+<%if @buses!=nil%>
+<table class="table table-striped" style="width:800px;">
+ 
+  <tbody>
+ <% @buses.each  do  |buss|%>
+      <tr>
+        <td><%= buss.id%></td>
+        <td style="width:50px;"><%= buss.name %></td>
+        <td><%= buss.tel %></td>
+        <td><%= buss.address %></td>
+        <td><%= buss.lng %></td>
+        <td><%= buss.lat %></td>
+        <td>&nbsp;</td>
+      </tr>
+<% end %>
+  </tbody>
+</table>
+<%end%>
+ </div>
+<span>查询的数据共有<%=@customers.length%>条</span>
+</div>
+   <div>
+   
+    </div>
+
+
+ <script type="text/javascript">
+
+     var countries = ['百度','阿里巴巴'];
+       $("#autocomplete").click(function(){
+              alert("dsfd");
+
+       });
+
+       $("#autocomplete").autocomplete({
+         serviceUrl:"/function/autocomplete",
+         onSelect: function (suggestion) {
+         alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+     }
+    });
+
+    </script>
